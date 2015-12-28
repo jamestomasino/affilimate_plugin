@@ -2,7 +2,7 @@
 
 Always browse Amazon.com using your favorite affiliate link.
 
-Get the [plugin]()
+Get the [plugin](https://chrome.google.com/webstore/detail/cocnpjpfjffplaajphbgkhjlcmhdokkh)
 
 - - - - -
 
