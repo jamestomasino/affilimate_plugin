@@ -1,5 +1,10 @@
 {
     "author": "James Tomasino",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
     "browser_action": {
 		"name": "Affilimate",
         "default_icon": "icon128.png",

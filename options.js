@@ -2,12 +2,18 @@
 chrome
 */
 function save_options() {
-	var color = document.getElementById('color').value;
-	var likesColor = document.getElementById('like').checked;
+	var affiliate = document.getElementById('affiliate').value;
 	chrome.storage.sync.set({
-		favoriteColor: color,
-		likesColor: likesColor
+		"affiliate": affiliate
 	}, function() {
+        chrome.tabs.query({
+			"active": true,
+			"currentWindow": true
+		}, function (tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, {
+				"functiontoInvoke": "updateOptions",
+			});
+		});
 		// Update status to let user know options were saved.
 		var status = document.getElementById('status');
 		status.textContent = 'Options saved.';
@@ -22,11 +28,9 @@ function save_options() {
 function restore_options() {
 	// Use default value color = 'red' and likesColor = true.
 	chrome.storage.sync.get({
-		favoriteColor: 'red',
-		likesColor: true
+		affiliate: 'tomablog-20'
 	}, function(items) {
-		document.getElementById('color').value = items.favoriteColor;
-		document.getElementById('like').checked = items.likesColor;
+		document.getElementById('affiliate').value = items.affiliate;
 	});
 }
 document.addEventListener('DOMContentLoaded', restore_options);
