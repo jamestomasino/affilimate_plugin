@@ -1,6 +1,6 @@
 ### Affiliate
 
-Always browse Amazon.com with your using your favorite affiliate link.
+Always browse Amazon.com using your favorite affiliate link.
 
 Get the [plugin]()
 

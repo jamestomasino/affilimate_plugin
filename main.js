@@ -9,30 +9,9 @@
 			case "readSelectedText":
 				getAffilimateOptions ( request.selectedText );
 				break;
-			case "readFullPage":
-				var getArticle = $.get( '//read.tomasino.org/read.py?url=' + document.URL );
-
-				getArticle.success(function( result ) {
-					if (result.error) {
-						getAffilimateOptions( result.messages );
-					} else {
-						var title = result.title;
-						var content = result.content;
-						var text = $(content).text();
-						getAffilimateOptions( title + "\n\n" + text );
-					}
-				}).error(function( jqXHR, textStatus, errorThrown ) {
-					getAffilimateOptions ( document.body.innerText || document.body.textContent );
-				});
-				break;
 			default:
 				break;
 		}
-	});
-
-	$(document).on( 'blur', '.__read .__read_long_word_delay', function () {
-		var val = String(this.value) || "tomablog-20";
-		setAffilimateOptions( {"affiliate": val} );
 	});
 
 	function setAffilimateOptions ( myOptions ) {
@@ -52,4 +31,31 @@
 			//r.play();
 		});
 	}
+
+	var tag="tomablog-20";
+
+	var urlParams,
+	match,
+	pl     = /\+/g,  // Regex for replacing addition symbol with a space
+	search = /([^&=]+)=?([^&]*)/g,
+	decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+	query  = window.location.search.substring(1);
+
+	urlParams = {};
+	while (match = search.exec(query))
+	urlParams[decode(match[1])] = decode(match[2]);
+
+	if ( !(urlParams["tag"]) || (urlParams["tag"] !== tag) ) {
+		urlParams["tag"] = tag;
+		var tags = "?";
+		for (var s in urlParams) {
+			tags += s + "=" + urlParams[s] + "&";
+		}
+		tags = tags.substring(0, tags.length - 1);
+		var o = document.location.origin;
+		var p = document.location.pathname;
+		var newURL = o + ((p)?p:"") + tags;
+		document.location = newURL
+	}
+
 })();

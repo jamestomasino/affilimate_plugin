@@ -1,10 +1,5 @@
 {
     "author": "James Tomasino",
-    "background": {
-        "scripts": [
-            "background.js"
-        ]
-    },
     "browser_action": {
 		"name": "Affilimate",
         "default_icon": "icon128.png",
@@ -12,16 +7,14 @@
     },
     "content_scripts": [
         {
-            "css": [
-                "main.css"
-            ],
             "js": [
 				"main.js"
             ],
             "matches": [
 				"https://*.amazon.com/*",
 				"http://*.amazon.com/*"
-            ]
+            ],
+			"run_at": "document_start"
         }
     ],
     "description": "Affilimate - Shop with your preferred affiliate code",
@@ -34,6 +27,10 @@
     "manifest_version": 2,
     "name": "Affilimate",
     "offline_enabled": false,
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
     "permissions": [
         "activeTab",
 		"storage"
