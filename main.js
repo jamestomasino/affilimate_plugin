@@ -7,16 +7,6 @@ chrome
 		"affiliate": "tomablog-20"
 	};
 
-	chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
-		switch (request.functiontoInvoke) {
-			case "updateOptions":
-				getAffilimateOptions ();
-				break;
-			default:
-				break;
-		}
-	});
-
 	function setAffilimateOptions ( myOptions ) {
 		chrome.storage.sync.clear(function () {
 			chrome.storage.sync.set(affilimateOptions, function() {});
@@ -25,8 +15,7 @@ chrome
 
 	function getAffilimateOptions ( text ) {
 		chrome.storage.sync.get(null, function ( myOptions ) {
-			affilimateOptions = myOptions;
-			console.log ("Affilimate: get options" + affilimateOptions);
+			affilimateOptions = myOptions || affilimateOptions;
 			processURL();
 		});
 	}

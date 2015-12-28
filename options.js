@@ -6,15 +6,6 @@ function save_options() {
 	chrome.storage.sync.set({
 		"affiliate": affiliate
 	}, function() {
-        chrome.tabs.query({
-			"active": true,
-			"currentWindow": true
-		}, function (tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {
-				"functiontoInvoke": "updateOptions",
-			});
-		});
-		// Update status to let user know options were saved.
 		var status = document.getElementById('status');
 		status.textContent = 'Options saved.';
 		setTimeout(function() {
